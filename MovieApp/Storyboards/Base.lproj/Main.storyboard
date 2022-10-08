@@ -16,9 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TnR-ii-ild">
-                                <rect key="frame" x="16" y="94" width="358" height="227"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="B35-xN-mzK">
+                                <rect key="frame" x="185" y="412" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular Movie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8s-1U-Udo">
+                                <rect key="frame" x="16" y="72" width="171.66666666666666" height="31.333333333333329"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TnR-ii-ild">
+                                <rect key="frame" x="16" y="133.33333333333334" width="358" height="227.00000000000003"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="5QH-Lr-KEI">
                                     <size key="itemSize" width="146" height="225"/>
@@ -42,16 +50,21 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="C8o-5P-vG1"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="B35-xN-mzK">
-                                <rect key="frame" x="185" y="412" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="1" green="0.94654830599999995" blue="0.96556288089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.66274511810000003" green="0.5411764979" blue="0.97647058959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" red="1" green="0.94654830599999995" blue="0.96556288089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="S8s-1U-Udo" secondAttribute="trailing" symbolic="YES" id="0G0-LF-w4t"/>
+                            <constraint firstItem="S8s-1U-Udo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="4gU-1T-YVZ"/>
+                            <constraint firstItem="S8s-1U-Udo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="Crt-dG-Ytm"/>
+                            <constraint firstItem="TnR-ii-ild" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.268957" id="K6d-65-EHm"/>
                             <constraint firstItem="B35-xN-mzK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kua-Ev-VYz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TnR-ii-ild" secondAttribute="trailing" constant="16" id="QkN-SE-ORm"/>
+                            <constraint firstItem="TnR-ii-ild" firstAttribute="top" secondItem="S8s-1U-Udo" secondAttribute="bottom" constant="30" id="SVF-FX-vL9"/>
                             <constraint firstItem="B35-xN-mzK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="kuy-as-mpP"/>
+                            <constraint firstItem="TnR-ii-ild" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.917949" id="nky-s5-gmh"/>
+                            <constraint firstItem="TnR-ii-ild" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sMI-U2-fhb"/>
                         </constraints>
                     </view>
                     <connections>

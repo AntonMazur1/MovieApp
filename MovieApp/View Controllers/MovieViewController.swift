@@ -11,41 +11,41 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
-    private let viewModel = MovieViewModel()
-    private var movies: [Production] = []
+    private var viewModel: MovieViewModelProtocol? {
+        didSet {
+            viewModel?.moviesDidChanged = { [unowned self] viewModel in
+                DispatchQueue.main.async { [unowned self] in
+                    movieCollectionView.reloadData()
+                    activityIndicator.stopAnimating()
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         movieCollectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
         activityIndicator.hidesWhenStopped = true
-        getMovies()
-    }
-    
-    private func getMovies() {
         activityIndicator.startAnimating()
-        viewModel.getMovieWithDelay { movie in
-            self.movies = movie.production_companies
-            DispatchQueue.main.async { [weak self] in
-                self?.movieCollectionView.reloadData()
-            }
-        }
+        viewModel = MovieViewModel()
+        viewModel?.getMovie()
     }
 }
 
 extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        movies.count
+        viewModel?.movies?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = movieCollectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as! MovieCollectionViewCell
-        let movie = movies[indexPath.row]
+        guard let movie = viewModel?.movies?[indexPath.row] else { return UICollectionViewCell() }
         cell.configureCell(with: movie)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: movieCollectionView.frame.width * 0.4, height: movieCollectionView.frame.height)
     }
 }
 
