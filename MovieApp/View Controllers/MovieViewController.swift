@@ -25,8 +25,10 @@ class MovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         movieCollectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
+        
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
+        
         viewModel = MovieViewModel()
         viewModel?.getMovie()
     }
