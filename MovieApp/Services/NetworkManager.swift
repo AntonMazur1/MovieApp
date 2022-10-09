@@ -31,4 +31,10 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    static func getImage(url: String) -> Data? {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500" + url) else { return Data() }
+        let data = try? Data(contentsOf: url)
+        return data
+    }
 }

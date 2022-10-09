@@ -11,7 +11,7 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
-    private var viewModel: MovieViewModelProtocol? {
+    private var viewModel: MovieViewModelProtocol! {
         didSet {
             viewModel?.moviesDidChanged = { [unowned self] viewModel in
                 DispatchQueue.main.async { [unowned self] in
@@ -30,19 +30,18 @@ class MovieViewController: UIViewController {
         activityIndicator.startAnimating()
         
         viewModel = MovieViewModel()
-        viewModel?.getMovie()
+        viewModel.getMovie()
     }
 }
 
 extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.movies?.count ?? 0
+        viewModel.numberOfRows
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = movieCollectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as! MovieCollectionViewCell
-        guard let movie = viewModel?.movies?[indexPath.row] else { return UICollectionViewCell() }
-        cell.configureCell(with: movie)
+        cell.viewModel = viewModel.getMovieCellViewModel(at: indexPath)
         return cell
     }
     

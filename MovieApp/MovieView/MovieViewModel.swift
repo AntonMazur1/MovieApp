@@ -8,16 +8,21 @@
 import Foundation
 
 protocol MovieViewModelProtocol {
-    var movies: [Production]? { get set }
     var moviesDidChanged: ((MovieViewModelProtocol) -> Void)? { get set }
+    var numberOfRows: Int { get }
     func getMovie()
+    func getMovieCellViewModel(at indexPath: IndexPath) -> MovieCollectionCellViewModelProtocol?
 }
 
 class MovieViewModel: MovieViewModelProtocol {
-    var movies: [Production]? {
+    private var movies: [Production]? {
         didSet {
             moviesDidChanged?(self)
         }
+    }
+    
+    var numberOfRows: Int {
+        movies?.count ?? 0
     }
     
     var moviesDidChanged: ((MovieViewModelProtocol) -> Void)?
@@ -34,5 +39,10 @@ class MovieViewModel: MovieViewModelProtocol {
                 }
             }
         }
+    }
+    
+    func getMovieCellViewModel(at indexPath: IndexPath) -> MovieCollectionCellViewModelProtocol? {
+        guard let movie = movies?[indexPath.row] else { return nil }
+        return MovieCollectionCellViewModel(movie: movie)
     }
 }
